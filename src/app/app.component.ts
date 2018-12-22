@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {News} from '../core/news';
+import {LoadNews} from '../core/news.actions';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'loadable';
+
+  news$: Observable<News>;
+
+  constructor(private store: Store<{news: News}>) {
+    this.news$ = this.store.select(state => state.news);
+  }
+
+  load() {
+    this.store.dispatch(new LoadNews());
+  }
 }
