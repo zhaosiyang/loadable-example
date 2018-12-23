@@ -1,10 +1,8 @@
-import {Action} from '@ngrx/store';
-import {onLoadableError, onLoadableLoad, onLoadableSuccess} from './loadable';
+import {Action, ActionReducer} from '@ngrx/store';
+import {Loadable, onLoadableError, onLoadableLoad, onLoadableSuccess} from './loadable';
 
-export type Reducer<T> =  (state: T, action: Action) => T;
-
-export function withLoadable<T>(reducer: Reducer<T>, {loadingActionType, successActionType, errorActionType}) {
-  return (state, action) => {
+export function withLoadable<T extends Loadable>(reducer: ActionReducer<T>, {loadingActionType, successActionType, errorActionType}): ActionReducer<T> {
+  return (state: T, action: Action): T => {
     if (action.type === loadingActionType) {
       state = onLoadableLoad(state);
     }
@@ -12,7 +10,7 @@ export function withLoadable<T>(reducer: Reducer<T>, {loadingActionType, success
       state = onLoadableSuccess(state);
     }
     if (action.type === errorActionType) {
-      state = onLoadableError(state, action.error);
+      state = onLoadableError(state, (action as any).error);
     }
     return reducer(state, action);
   };
