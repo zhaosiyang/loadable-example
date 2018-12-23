@@ -13,7 +13,7 @@ export function createDefaultLoadable(): Loadable {
   };
 }
 
-export function onLoadingReducer<T extends Loadable>(loadable: T): T {
+export function onLoadableLoad<T extends Loadable>(loadable: T): T {
   return {
     ...(loadable as any),
     loading: true,
@@ -22,7 +22,7 @@ export function onLoadingReducer<T extends Loadable>(loadable: T): T {
   } as T;
 }
 
-export function onSuccessReducer<T extends Loadable>(loadable: T): T {
+export function onLoadableSuccess<T extends Loadable>(loadable: T): T {
   return {
     ...(loadable as any),
     loading: false,
@@ -31,7 +31,7 @@ export function onSuccessReducer<T extends Loadable>(loadable: T): T {
   } as T;
 }
 
-export function onErrorReducer<T extends Loadable>(loadable: T, error: any): T {
+export function onLoadableError<T extends Loadable>(loadable: T, error: any): T {
   return {
     ...(loadable as any),
     loading: false,

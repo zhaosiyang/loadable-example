@@ -6,8 +6,11 @@ import {LoadNews} from '../core/news.actions';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <button (click)="load()">Load News</button>
+    <loading-container [loadable]="news$ | async">
+        <p *ngFor="let item of (news$ | async).entities">{{item}}</p>
+    </loading-container>`
 })
 export class AppComponent {
 
@@ -19,7 +22,6 @@ export class AppComponent {
 
   load() {
     const action = new LoadNews();
-    console.log('load action', action);
     this.store.dispatch(action);
   }
 }

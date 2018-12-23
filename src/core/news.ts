@@ -1,7 +1,7 @@
 import {createDefaultLoadable, Loadable} from '../loadable/loadable';
 import {Action} from '@ngrx/store';
 import {LoadNewsSuccess, NewsActionsTypes} from './news.actions';
-import {withLoadable} from './with-loadable';
+import {withLoadable} from '../loadable/with-loadable';
 
 export interface News extends Loadable {
   entities: string[];

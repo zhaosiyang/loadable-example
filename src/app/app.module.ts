@@ -7,10 +7,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {EffectsModule} from '@ngrx/effects';
 import {NewsEffects} from '../core/news.effects';
 import {newsReducer} from '../core/news';
+import { LoadingContainerComponent } from './loading-container/loading-container.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadingContainerComponent
   ],
   imports: [
     BrowserModule,
