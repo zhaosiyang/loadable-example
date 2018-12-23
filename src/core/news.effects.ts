@@ -13,7 +13,7 @@ export class NewsEffects {
   @Effect()
   loadNews = this.actions$.pipe(
     ofType(NewsActionsTypes.Load),
-    switchMap(action => this.http.get('http://demo9695495.mockable.io/')),
+    switchMap(action => this.http.get('https://demo9695495.mockable.io')),
     map((response: any) => new LoadNewsSuccess(response.todaysNews)),
     catchError(error => of(new LoadNewsError(error)))
   );
