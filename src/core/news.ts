@@ -1,30 +1,35 @@
-import {createDefaultLoadable, Loadable, onErrorReducer, onLoadingReducer, onSuccessReducer} from '../loadable/loadable';
+import {createDefaultLoadable, Loadable} from '../loadable/loadable';
 import {Action} from '@ngrx/store';
-import {LoadNewsError, LoadNewsSuccess, NewsActionsTypes} from './news.actions';
+import {LoadNewsSuccess, NewsActionsTypes} from './news.actions';
+import {withLoadable} from './with-loadable';
 
 export interface News extends Loadable {
   entities: string[];
 }
 
-export function createDefaultTodos(): News {
+export function createDefaultNews(): News {
   return {
     ...createDefaultLoadable(),
     entities: []
   };
 }
 
-export function newsReducer(state: News = createDefaultTodos(), action: Action): News {
+function baseNewsReducer(state: News = createDefaultNews(), action: Action): News {
   switch (action.type) {
-    case NewsActionsTypes.Load:
-      return onLoadingReducer(state);
     case NewsActionsTypes.LoadSuccess:
       return {
-        ...onSuccessReducer(state),
+        ...state,
         entities: (action as LoadNewsSuccess).entities
       };
-    case NewsActionsTypes.LoadError:
-      return onErrorReducer(state, (action as LoadNewsError).error);
     default:
       return state;
   }
+}
+
+export function newsReducer(state: News, action: Action): News {
+  return withLoadable(baseNewsReducer, {
+    loadingActionType: NewsActionsTypes.Load,
+    successActionType: NewsActionsTypes.LoadSuccess,
+    errorActionType: NewsActionsTypes.LoadError,
+  })(state, action);
 }

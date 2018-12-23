@@ -18,6 +18,8 @@ export class AppComponent {
   }
 
   load() {
-    this.store.dispatch(new LoadNews());
+    const action = new LoadNews();
+    console.log('load action', action);
+    this.store.dispatch(action);
   }
 }
