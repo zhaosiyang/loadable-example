@@ -26,7 +26,7 @@ export class NewsEffects {
       // return this.http.get('some url');
       return mockApiResponse();
     }),
-    map((response: any) => new LoadNewsSuccess(response.todaysNews)),
+    map((response: any) => new LoadNewsSuccess({entities: response.todaysNews})),
     catchError(error => of(new LoadNewsError(error)))
   );
 }

@@ -12,7 +12,7 @@ export class LoadNews implements Action {
 
 export class LoadNewsSuccess implements Action {
   readonly type = NewsActionsTypes.LoadSuccess;
-  constructor(public entities: string[]) {}
+  constructor(public payload: {entities: string[]}) {}
 }
 
 export class LoadNewsError implements Action {

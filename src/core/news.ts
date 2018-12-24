@@ -19,7 +19,7 @@ function baseNewsReducer(state: News = createDefaultNews(), action: Action): New
     case NewsActionsTypes.LoadSuccess:
       return {
         ...state,
-        entities: (action as LoadNewsSuccess).entities
+        entities: (action as LoadNewsSuccess).payload.entities
       };
     default:
       return state;
