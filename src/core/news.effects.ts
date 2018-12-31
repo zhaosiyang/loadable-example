@@ -24,9 +24,10 @@ export class NewsEffects {
     ofType(NewsActionsTypes.Load),
     switchMap(action => {
       // return this.http.get('some url');
-      return mockApiResponse();
+      return mockApiResponse().pipe(
+        map((response: any) => new LoadNewsSuccess({entities: response.todaysNews})),
+        catchError(error => of(new LoadNewsError(error)))
+      );
     }),
-    map((response: any) => new LoadNewsSuccess({entities: response.todaysNews})),
-    catchError(error => of(new LoadNewsError(error)))
   );
 }

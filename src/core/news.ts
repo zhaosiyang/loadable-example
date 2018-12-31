@@ -1,6 +1,6 @@
 import {createDefaultLoadable, Loadable} from '../loadable/loadable';
 import {Action} from '@ngrx/store';
-import {LoadNewsSuccess, NewsActionsTypes} from './news.actions';
+import {NewActionsUnion, NewsActionsTypes} from './news.actions';
 import {withLoadable} from '../loadable/with-loadable';
 
 export interface News extends Loadable {
@@ -14,12 +14,12 @@ export function createDefaultNews(): News {
   };
 }
 
-function baseNewsReducer(state: News = createDefaultNews(), action: Action): News {
+function baseNewsReducer(state: News = createDefaultNews(), action: NewActionsUnion): News {
   switch (action.type) {
     case NewsActionsTypes.LoadSuccess:
       return {
         ...state,
-        entities: (action as LoadNewsSuccess).payload.entities
+        entities: action.payload.entities
       };
     default:
       return state;

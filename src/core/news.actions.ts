@@ -20,4 +20,4 @@ export class LoadNewsError implements Action {
   constructor(public error: any) {}
 }
 
-
+export type NewActionsUnion = LoadNews | LoadNewsSuccess | LoadNewsError;
