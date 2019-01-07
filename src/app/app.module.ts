@@ -8,6 +8,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {NewsEffects} from '../core/news.effects';
 import {newsReducer} from '../core/news';
 import { LoadingContainerComponent } from './loading-container/loading-container.component';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoadingContainerComponent } from './loading-container/loading-container
     BrowserModule,
     StoreModule.forRoot({news: newsReducer}),
     HttpClientModule,
-    EffectsModule.forRoot([NewsEffects])
+    EffectsModule.forRoot([NewsEffects]),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]
