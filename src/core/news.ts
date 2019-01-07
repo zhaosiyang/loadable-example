@@ -1,5 +1,4 @@
 import {createDefaultLoadable, Loadable} from '../loadable/loadable';
-import {Action} from '@ngrx/store';
 import {NewActionsUnion, NewsActionsTypes} from './news.actions';
 import {withLoadable} from '../loadable/with-loadable';
 
@@ -26,7 +25,7 @@ function baseNewsReducer(state: News = createDefaultNews(), action: NewActionsUn
   }
 }
 
-export function newsReducer(state: News, action: Action): News {
+export function newsReducer(state: News, action: NewActionsUnion): News {
   return withLoadable(baseNewsReducer, {
     loadingActionType: NewsActionsTypes.Load,
     successActionType: NewsActionsTypes.LoadSuccess,
